@@ -10,4 +10,6 @@
 
 @interface RecipesTableViewController : UITableViewController
 
+@property (strong, nonatomic) NSArray *ingredients;
+
 @end

@@ -10,4 +10,7 @@
 
 @interface RecipePuppySearch : NSObject
 
+- (RecipePuppySearch *) initWithIngredients:(NSArray *) ingredients;
+- (NSArray *) getRecipeResults;
+
 @end

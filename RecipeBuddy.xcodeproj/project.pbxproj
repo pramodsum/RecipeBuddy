@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		491293911901538100B7063E /* food_list.txt in Resources */ = {isa = PBXBuildFile; fileRef = 491293901901538100B7063E /* food_list.txt */; };
 		49C3DD761900D5AD0097511F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C3DD751900D5AD0097511F /* Foundation.framework */; };
 		49C3DD781900D5AD0097511F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C3DD771900D5AD0097511F /* CoreGraphics.framework */; };
 		49C3DD7A1900D5AD0097511F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C3DD791900D5AD0097511F /* UIKit.framework */; };
@@ -22,7 +23,6 @@
 		49C3DD9F1900D5AD0097511F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 49C3DD9D1900D5AD0097511F /* InfoPlist.strings */; };
 		49C3DDA11900D5AD0097511F /* RecipeBuddyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 49C3DDA01900D5AD0097511F /* RecipeBuddyTests.m */; };
 		49C3DDBF1900D87F0097511F /* AcousticModelEnglish.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 49C3DDBB1900D87F0097511F /* AcousticModelEnglish.bundle */; };
-		49C3DDC01900D87F0097511F /* AcousticModelSpanish.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 49C3DDBC1900D87F0097511F /* AcousticModelSpanish.bundle */; };
 		49C3DDC11900D87F0097511F /* OpenEars.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C3DDBD1900D87F0097511F /* OpenEars.framework */; };
 		49C3DDC21900D87F0097511F /* Slt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C3DDBE1900D87F0097511F /* Slt.framework */; };
 		49C3DDC41900D8920097511F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C3DDC31900D8920097511F /* AVFoundation.framework */; };
@@ -58,6 +58,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		491293901901538100B7063E /* food_list.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = food_list.txt; sourceTree = "<group>"; };
 		49C3DD721900D5AD0097511F /* RecipeBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecipeBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49C3DD751900D5AD0097511F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		49C3DD771900D5AD0097511F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -78,7 +79,6 @@
 		49C3DD9E1900D5AD0097511F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		49C3DDA01900D5AD0097511F /* RecipeBuddyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecipeBuddyTests.m; sourceTree = "<group>"; };
 		49C3DDBB1900D87F0097511F /* AcousticModelEnglish.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = AcousticModelEnglish.bundle; path = ../../../OpenEarsDistribution/Framework/AcousticModelEnglish.bundle; sourceTree = "<group>"; };
-		49C3DDBC1900D87F0097511F /* AcousticModelSpanish.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = AcousticModelSpanish.bundle; path = ../../../OpenEarsDistribution/Framework/AcousticModelSpanish.bundle; sourceTree = "<group>"; };
 		49C3DDBD1900D87F0097511F /* OpenEars.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenEars.framework; path = ../../../OpenEarsDistribution/Framework/OpenEars.framework; sourceTree = "<group>"; };
 		49C3DDBE1900D87F0097511F /* Slt.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Slt.framework; path = ../../../OpenEarsDistribution/Framework/Slt.framework; sourceTree = "<group>"; };
 		49C3DDC31900D8920097511F /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -175,7 +175,6 @@
 				49C3DDC51900D89D0097511F /* AudioToolbox.framework */,
 				49C3DDC31900D8920097511F /* AVFoundation.framework */,
 				49C3DDBB1900D87F0097511F /* AcousticModelEnglish.bundle */,
-				49C3DDBC1900D87F0097511F /* AcousticModelSpanish.bundle */,
 				49C3DDBD1900D87F0097511F /* OpenEars.framework */,
 				49C3DDBE1900D87F0097511F /* Slt.framework */,
 				49C3DD751900D5AD0097511F /* Foundation.framework */,
@@ -231,6 +230,7 @@
 		49C3DDAB1900D6420097511F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				491293901901538100B7063E /* food_list.txt */,
 				49C3DD841900D5AD0097511F /* AppDelegate.h */,
 				49C3DD851900D5AD0097511F /* AppDelegate.m */,
 				49C3DE221900DE5F0097511F /* Recipe.h */,
@@ -386,8 +386,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				49C3DDC01900D87F0097511F /* AcousticModelSpanish.bundle in Resources */,
 				49C3DD8E1900D5AD0097511F /* Images.xcassets in Resources */,
+				491293911901538100B7063E /* food_list.txt in Resources */,
 				49C3DD801900D5AD0097511F /* InfoPlist.strings in Resources */,
 				49C3DDBF1900D87F0097511F /* AcousticModelEnglish.bundle in Resources */,
 				49C3DD891900D5AD0097511F /* Main.storyboard in Resources */,
@@ -646,6 +646,7 @@
 				49C3DDA61900D5AD0097511F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		49C3DDA71900D5AD0097511F /* Build configuration list for PBXNativeTarget "RecipeBuddyTests" */ = {
 			isa = XCConfigurationList;
@@ -654,6 +655,7 @@
 				49C3DDA91900D5AD0097511F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
