@@ -15,8 +15,8 @@
 }
 
 - (RecipePuppySearch *) initWithIngredients:(NSArray *) ingredients {
-    NSLog(@"Ingredients: %@", ingredients);
     ingredientList = [[ingredients componentsJoinedByString:@","] lowercaseString];
+    NSLog(@"Ingredients: %@", ingredientList);
 
     [self searchRecipePuppy];
     return self;
@@ -30,20 +30,22 @@
     [NSURLConnection sendAsynchronousRequest:[[NSURLRequest alloc] initWithURL:url] queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
         recipes = [[NSMutableArray alloc] init];
 
-        NSLog(@"DATA: %@", data);
-
         if (!error) {
             NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-            NSLog(@"JSON: %@", json);
             NSArray *results = [json objectForKey:@"results"];
 
-            NSLog(@"Results: %@", results);
-
             for (NSDictionary *result in results) {
-                [recipes addObject:[[Recipe alloc] initWithResult:result]];
 
+                Recipe *recipe = [[Recipe alloc] init];
+                [recipe setName:result[@"title"]];
+                [recipe setRecipe_link:[[result objectForKey:@"href"] stringByReplacingOccurrencesOfString:@"\\" withString:@""]];
+                [recipe setImage_link:[[result objectForKey:@"thumbnail"] stringByReplacingOccurrencesOfString:@"\\" withString:@""]];
+                [recipes addObject:recipe];
             }
-            NSLog(@"%lu recipes found for ingredients", (unsigned long)results.count);
+            NSLog(@"%lu recipes found for ingredients", (unsigned long)recipes.count);
+            if(recipes.count == 0) {
+                _noResults = @"TRUE";
+            }
 
         } else {
             NSLog(@"ERROR: %@", error);
@@ -54,6 +56,10 @@
 
 - (NSArray *) getRecipeResults {
     return recipes;
+}
+
+- (NSInteger) getRecipeCount {
+    return recipes.count;
 }
 
 @end

@@ -13,6 +13,7 @@
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSString *recipe_link;
 @property (strong, nonatomic) NSString *image_link;
+@property (strong, nonatomic) IBOutlet UIImageView *food_image;
 @property (strong, nonatomic) NSMutableArray *ingredients;
 
 - (Recipe *) initWithResult:(NSDictionary *) recipe;

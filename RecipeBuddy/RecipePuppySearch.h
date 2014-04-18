@@ -12,5 +12,8 @@
 
 - (RecipePuppySearch *) initWithIngredients:(NSArray *) ingredients;
 - (NSArray *) getRecipeResults;
+- (NSInteger) getRecipeCount;
+
+@property (strong, nonatomic) NSString *noResults;
 
 @end

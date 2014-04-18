@@ -35,7 +35,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [OpenEarsLogging startOpenEarsLogging];
+//    [OpenEarsLogging startOpenEarsLogging];
     ingredients = [[NSMutableArray alloc] init];
     [self.openEarsEventsObserver setDelegate:self];
 }
@@ -86,8 +86,15 @@
     if ([[segue identifier] isEqualToString:@"recipeSearch_segue"]) {
         [self.pocketsphinxController stopListening];
         search = [[RecipePuppySearch alloc] initWithIngredients:ingredients];
+
+        while([search getRecipeCount] == 0 && ![search.noResults isEqual:@"TRUE"]) {
+            NSLog(@"Still waiting for search results....");
+        }
+
         RecipesTableViewController *vc = (RecipesTableViewController *)[segue destinationViewController];
-        [vc setIngredients:[search getRecipeResults]];
+        vc.recipes = [[NSArray alloc] initWithArray:[search getRecipeResults]];
+        [vc.tableView reloadData];
+        NSLog(@"Recipes: %lu", (unsigned long)vc.recipes.count);
     }
  }
 

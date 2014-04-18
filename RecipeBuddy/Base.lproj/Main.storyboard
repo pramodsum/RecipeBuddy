@@ -105,6 +105,11 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="food_image" destination="cWf-iD-XAK" id="Yax-Tz-ieO"/>
+                                    <outlet property="ingredients" destination="sy6-Ag-Lla" id="2O9-Wu-mq1"/>
+                                    <outlet property="name" destination="75D-1g-FTZ" id="u3f-Kk-FOv"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
