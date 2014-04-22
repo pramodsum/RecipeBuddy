@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		491293911901538100B7063E /* food_list.txt in Resources */ = {isa = PBXBuildFile; fileRef = 491293901901538100B7063E /* food_list.txt */; };
-		491293961901852400B7063E /* NavBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 491293951901852400B7063E /* NavBar.m */; };
 		4981D2EF1905E7D200A62CFE /* RecipeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4981D2EE1905E7D200A62CFE /* RecipeViewController.m */; };
 		4981D2F21905E9F300A62CFE /* YummlySearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 4981D2F11905E9F300A62CFE /* YummlySearch.m */; };
 		49C3DD761900D5AD0097511F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C3DD751900D5AD0097511F /* Foundation.framework */; };
@@ -62,8 +61,6 @@
 
 /* Begin PBXFileReference section */
 		491293901901538100B7063E /* food_list.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = food_list.txt; sourceTree = "<group>"; };
-		491293941901852400B7063E /* NavBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavBar.h; sourceTree = "<group>"; };
-		491293951901852400B7063E /* NavBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavBar.m; sourceTree = "<group>"; };
 		4981D2ED1905E7D200A62CFE /* RecipeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeViewController.h; sourceTree = "<group>"; };
 		4981D2EE1905E7D200A62CFE /* RecipeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeViewController.m; sourceTree = "<group>"; };
 		4981D2F01905E9F300A62CFE /* YummlySearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YummlySearch.h; sourceTree = "<group>"; };
@@ -264,8 +261,6 @@
 			isa = PBXGroup;
 			children = (
 				49C3DE281900E1800097511F /* Cells */,
-				491293941901852400B7063E /* NavBar.h */,
-				491293951901852400B7063E /* NavBar.m */,
 				49C3DD871900D5AD0097511F /* Main.storyboard */,
 			);
 			name = View;
@@ -438,7 +433,6 @@
 				49C3DE2B1900E1B30097511F /* RecipesTableViewController.m in Sources */,
 				4981D2F21905E9F300A62CFE /* YummlySearch.m in Sources */,
 				49C3DE171900DDD00097511F /* SDWebImageCompat.m in Sources */,
-				491293961901852400B7063E /* NavBar.m in Sources */,
 				49C3DE1E1900DDD00097511F /* UIImage+GIF.m in Sources */,
 				49C3DE1C1900DDD00097511F /* SDWebImagePrefetcher.m in Sources */,
 				49C3DD861900D5AD0097511F /* AppDelegate.m in Sources */,

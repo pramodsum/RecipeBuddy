@@ -164,7 +164,7 @@
 - (void) pocketsphinxDidCompleteCalibration {
 	NSLog(@"Pocketsphinx calibration is complete.");
     [self.pocketsphinxController suspendRecognition];
-    [[[UIAlertView alloc] initWithTitle:@"Your Sous Chef is Ready!" message:@"When you're ready to start listing, please say \"OK\" followed by the ingridients you wish to find recipes for! When finished just say \"Done\" or \"Finished\"!"
+    [[[UIAlertView alloc] initWithTitle:@"Your Sous Chef is Ready!" message:@"When you're ready to start listing, please say \"OK\" followed by the ingredients you want in your recipe!\nWhen finished just say \"Done\" or \"Finished\"!"
                                delegate:self
                       cancelButtonTitle:nil
                       otherButtonTitles:@"OK", nil] show];
@@ -205,9 +205,9 @@
 - (void) pocketSphinxContinuousSetupDidFail { // This can let you know that something went wrong with the recognition loop startup. Turn on OPENEARSLOGGING to learn why.
 	NSLog(@"Setting up the continuous recognition loop has failed for some reason, please turn on OpenEarsLogging to learn more.");
     [[[UIAlertView alloc] initWithTitle:@"Setup Failed"
-                                       message:@"Setting up the continuous recognition loop has failed for some reason, please turn on OpenEarsLogging to learn more."
+                                       message:@"Setting up the continuous recognition loop has failed for some reason, please turn on OpenEarsLogging to learn more. The application did not work at this time. "
                                       delegate:self
-                             cancelButtonTitle:nil
+                             cancelButtonTitle:@"OK"
                              otherButtonTitles:nil] show];
 }
 

@@ -26,13 +26,25 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
+    //Read ingredients list out loud
+    AVSpeechUtterance *utterance = [[AVSpeechUtterance alloc] initWithString: _recipe.ingredient_list];
+    utterance.rate = AVSpeechUtteranceMinimumSpeechRate;
+    [_synthesizer speakUtterance:utterance];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+    [self.navigationController setTitle:_recipe.name];
+    _recipe_image = _recipe.food_image_large;
+    _recipe_text.text = _recipe.ingredient_list;
+    _yields.text = _recipe.yields;
+    _time.text = _recipe.time;
 }
 
 /*

@@ -7,6 +7,7 @@
 //
 
 #import "RecipesTableViewController.h"
+#import "RecipeViewController.h"
 #import "RecipeCell.h"
 #import "AppDelegate.h"
 
@@ -18,6 +19,7 @@
 
 @implementation RecipesTableViewController {
     AppDelegate *appDelegate;
+    NSInteger selectedIndex;
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -88,20 +90,21 @@
     return cell;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    RecipeCell *cell = (RecipeCell *)[tableView cellForRowAtIndexPath:indexPath];
+//-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+//    selectedIndex = indexPath.row;
+//    [self performSegueWithIdentifier:@"recipeSelected_segue" sender:self];
+//}
 
-}
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([[segue identifier] isEqualToString:@"recipeSelected_segue"]) {
+        RecipeViewController *vc = (RecipeViewController *)[segue destinationViewController];
+        vc.recipe = [_recipes objectAtIndex:selectedIndex];
+    }
 }
-*/
 
 @end
