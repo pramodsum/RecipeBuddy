@@ -27,6 +27,7 @@
 
 - (Recipe *) initWithRecipePuppyResult:(NSDictionary *) recipe;
 - (Recipe *) initWithYummlyResult:(NSDictionary *) recipe;
-- (void) fetchRecipe;
+- (Recipe *) fetchRecipe:(Recipe *)prev;
+- (Recipe *) fetchRecipe;
 
 @end

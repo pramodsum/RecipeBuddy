@@ -19,21 +19,12 @@
 
 @implementation ViewController {
     NSMutableArray *ingredients;
+    AppDelegate *appDelegate;
     NSString *lmPath;
     NSString *dicPath;
     YummlySearch *search;
     BOOL wakeup;
 }
-
-@synthesize openEarsEventsObserver;
-
-@synthesize pocketsphinxController;
-@synthesize fliteController;
-@synthesize usingStartLanguageModel;
-@synthesize slt;
-@synthesize restartAttemptsDueToPermissionRequests;
-@synthesize startupFailedDueToLackOfPermissions;
-@synthesize heardText;
 
 - (void)viewDidLoad
 {
@@ -41,13 +32,17 @@
 //    [OpenEarsLogging startOpenEarsLogging];
     wakeup = false;
     ingredients = [[NSMutableArray alloc] init];
-    [self.openEarsEventsObserver setDelegate:self];
-    [self createLanguageModel];
-    [self.pocketsphinxController startListeningWithLanguageModelAtPath:lmPath dictionaryAtPath:dicPath acousticModelAtPath:[AcousticModel pathToModel:@"AcousticModelEnglish"] languageModelIsJSGF:NO];
-}
 
-- (void)viewWillAppear:(BOOL)animated {
+    appDelegate = ((AppDelegate *)[[UIApplication sharedApplication] delegate]);
+
+    [appDelegate.openEarsEventsObserver setDelegate:self];
     [self createLanguageModel];
+
+    if(![appDelegate.pocketsphinxController isSuspended]) {
+        [appDelegate.pocketsphinxController startListeningWithLanguageModelAtPath:lmPath dictionaryAtPath:dicPath acousticModelAtPath:[AcousticModel pathToModel:@"AcousticModelEnglish"] languageModelIsJSGF:NO];
+    } else {
+        [appDelegate.pocketsphinxController resumeRecognition];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -73,8 +68,8 @@
         if([words count] > 2) {
             [self addIngredients:[words componentsJoinedByString:@" "]];
         }
-    } else if(([words[0] isEqual:@"FINISHED"] || [words[0] isEqual:@"DONE"]) && wakeup) {
-        [self.pocketsphinxController stopListening];
+    } else if(([words[0] isEqual:@"FINISHED"] || [words[0] isEqual:@"NEXT"] || [words[0] isEqual:@"DONE"]) && wakeup) {
+        [appDelegate.pocketsphinxController suspendRecognition];
         if([ingredients count] > 0) {
             [self performSegueWithIdentifier:@"recipeSearch_segue" sender:self];
         } else {
@@ -88,6 +83,8 @@
         [ingredients removeAllObjects];
         NSLog(@"Cleared ingredient list");
         [_ingredientListView setText:[ingredients componentsJoinedByString:@", "]];
+    } else if([words[0] isEqualToString:@"HELP"]) {
+        [self help:self];
     } else if(wakeup){
         [self addIngredients:hypothesis];
     } else {
@@ -118,7 +115,7 @@
  - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
     {
     if ([[segue identifier] isEqualToString:@"recipeSearch_segue"]) {
-        [self.pocketsphinxController stopListening];
+        [appDelegate.pocketsphinxController stopListening];
         search = [[YummlySearch alloc] initWithIngredients:ingredients];
 
         RecipesTableViewController *vc = (RecipesTableViewController *)[segue destinationViewController];
@@ -163,8 +160,8 @@
 
 - (void) pocketsphinxDidCompleteCalibration {
 	NSLog(@"Pocketsphinx calibration is complete.");
-    [self.pocketsphinxController suspendRecognition];
-    [[[UIAlertView alloc] initWithTitle:@"Your Sous Chef is Ready!" message:@"When you're ready to start listing, please say \"OK\" followed by the ingredients you want in your recipe!\nWhen finished just say \"Done\" or \"Finished\"!"
+    [appDelegate.pocketsphinxController suspendRecognition];
+    [[[UIAlertView alloc] initWithTitle:@"Your Sous Chef is Ready!" message:@"When you're ready to start listing, please say \"OK\" followed by the ingredients you want in your recipe!\nWhen finished just say \"Next\" or \"Finished\"!"
                                delegate:self
                       cancelButtonTitle:nil
                       otherButtonTitles:@"OK", nil] show];
@@ -172,8 +169,8 @@
 
 - (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if([[alertView title] isEqualToString:@"Your Sous Chef is Ready!"]) {
-        [self.pocketsphinxController resumeRecognition];
+    if([[alertView title] isEqualToString:@"Your Sous Chef is Ready!"] || [[alertView title] isEqualToString:@"Need Some Help?"] || [[alertView title] isEqualToString:@"Uh Oh!"]) {
+        [appDelegate.pocketsphinxController resumeRecognition];
     }
 }
 
@@ -215,44 +212,14 @@
 	NSLog(@"A test file that was submitted for recognition is now complete.");
 }
 
-#pragma mark - OpenEars Allocations
-
-- (OpenEarsEventsObserver *)openEarsEventsObserver {
-	if (openEarsEventsObserver == nil) {
-		openEarsEventsObserver = [[OpenEarsEventsObserver alloc] init];
-	}
-	return openEarsEventsObserver;
-}
-
-// Lazily allocated PocketsphinxController.
-- (PocketsphinxController *)pocketsphinxController {
-	if (pocketsphinxController == nil) {
-		pocketsphinxController = [[PocketsphinxController alloc] init];
-        pocketsphinxController.verbosePocketSphinx = TRUE; // Uncomment me for verbose debug output
-        pocketsphinxController.outputAudio = TRUE;
-#ifdef kGetNbest
-        pocketsphinxController.returnNbest = TRUE;
-        pocketsphinxController.nBestNumber = 5;
-#endif
-	}
-	return pocketsphinxController;
-}
-
-// Lazily allocated slt voice.
-- (Slt *)slt {
-	if (slt == nil) {
-		slt = [[Slt alloc] init];
-	}
-	return slt;
-}
-
-// Lazily allocated FliteController.
-- (FliteController *)fliteController {
-	if (fliteController == nil) {
-		fliteController = [[FliteController alloc] init];
-
-	}
-	return fliteController;
+- (IBAction)help:(id)sender {
+    [appDelegate.pocketsphinxController suspendRecognition];
+    NSString *message = @"Commands:\nOKAY: Wakes up Sous Chef\nCLEAR: Clears all ingredients\nHELP: Brings up help menu\nNEXT/FINISHED/DONE: Searches for recipes with your specified ingredients\nAnything else recognized will be added as ingredients!";
+    [[[UIAlertView alloc] initWithTitle:@"Need Some Help?"
+                                message:message
+                               delegate:self
+                      cancelButtonTitle:@"OK"
+                      otherButtonTitles:nil] show];
 }
 
 @end

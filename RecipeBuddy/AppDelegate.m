@@ -13,6 +13,10 @@
 @implementation AppDelegate
 
 @synthesize recipeView = _recipeView;
+@synthesize pocketsphinxController;
+@synthesize openEarsEventsObserver;
+@synthesize fliteController;
+@synthesize slt;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -52,6 +56,45 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark - Actions
+
+- (void) pocketsphinxDidReceiveHypothesis:(NSString *)hypothesis recognitionScore:(NSString *)recognitionScore utteranceID:(NSString *)utteranceID {
+
+    NSMutableArray * words = [[NSMutableArray alloc] initWithArray:[hypothesis componentsSeparatedByString:@" "]];
+    NSLog(@"words: %@", words);
+}
+
+#pragma mark - OpenEars Allocations
+
+- (OpenEarsEventsObserver *)openEarsEventsObserver {
+	if (openEarsEventsObserver == nil) {
+		openEarsEventsObserver = [[OpenEarsEventsObserver alloc] init];
+	}
+	return openEarsEventsObserver;
+}
+
+// Lazily allocated PocketsphinxController.
+- (PocketsphinxController *)pocketsphinxController {
+	if (pocketsphinxController == nil) {
+		pocketsphinxController = [[PocketsphinxController alloc] init];
+        pocketsphinxController.verbosePocketSphinx = TRUE; // Uncomment me for verbose debug output
+        pocketsphinxController.outputAudio = TRUE;
+#ifdef kGetNbest
+        pocketsphinxController.returnNbest = TRUE;
+        pocketsphinxController.nBestNumber = 5;
+#endif
+	}
+	return pocketsphinxController;
+}
+
+// Lazily allocated slt voice.
+- (Slt *)slt {
+	if (slt == nil) {
+		slt = [[Slt alloc] init];
+	}
+	return slt;
 }
 
 @end

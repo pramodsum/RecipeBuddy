@@ -36,7 +36,13 @@
     return self;
 }
 
-- (void) fetchRecipe {
+- (Recipe *) fetchRecipe:(Recipe *)prev {
+    NSLog(@"FETCHING RECIPE!");
+    _name = prev.name;
+    _id = prev.id;
+    _image_link = prev.image_link;
+    _food_image = prev.food_image;
+
     NSString *app_id = @"760ddeb5";
     NSString *app_key = @"e7140a04138a2d246e07710ee0d566b9";
     NSString *recipeURL = [NSString stringWithFormat:@"http://api.yummly.com/v1/api/recipe/%@?_app_id=%@&_app_key=%@", _id, app_id, app_key];
@@ -51,21 +57,78 @@
 
     if (error == nil) {
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+        //        NSLog(@"RECIPE: %@", json);
+        _name = json[@"name"];
+        NSLog(@"%@", _name);
         _ingredient_list = [NSString stringWithFormat:@"Ingredients:\n%@", [self formatIngredients:json[@"ingredientLines"]]];
-        [_food_image_large setImageWithURL:[NSURL URLWithString:[json[@"images"] objectForKey:@"hostedLargeUrl"]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+//        NSLog(@"%@", _ingredient_list);
+//        NSString *url = [[json[@"images"] firstObject] objectForKey:@"hostedLargeUrl"];
+//        [_food_image_large setImageWithURL:[NSURL URLWithString:url] placeholderImage:_food_image.image];
+//        NSLog(@"link: %@", [NSURL URLWithString:[json[@"images"] objectForKey:@"hostedLargeUrl"]]);
         _recipe_link = [json[@"source"] objectForKey:@"sourceRecipeUrl"];
+        NSLog(@"%@", _recipe_link);
         _yields = json[@"yield"];
+//        NSLog(@"%@", _yields);
         _time = json[@"totalTime"];
+//        NSLog(@"%@", _time);
     } else {
         NSLog(@"ERROR: %@", error);
     }
+    return self;
+}
 
+- (Recipe *) fetchRecipe {
+    NSLog(@"FETCHING RECIPE!");
+
+    NSString *app_id = @"760ddeb5";
+    NSString *app_key = @"e7140a04138a2d246e07710ee0d566b9";
+    NSString *recipeURL = [NSString stringWithFormat:@"http://api.yummly.com/v1/api/recipe/%@?_app_id=%@&_app_key=%@", _id, app_id, app_key];
+
+    NSURL *url = [NSURL URLWithString:recipeURL];
+
+    NSURLResponse *response = nil;
+    NSError *error = nil;
+    NSData * data = [NSURLConnection sendSynchronousRequest:[[NSURLRequest alloc] initWithURL:url]
+                                          returningResponse:&response
+                                                      error:&error];
+
+    if (error == nil) {
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+        //        NSLog(@"RECIPE: %@", json);
+        _name = json[@"name"];
+        NSLog(@"%@", _name);
+        _ingredient_list = [self formatIngredients:json[@"ingredientLines"]];
+
+        NSDictionary *image = [json[@"images"] firstObject];
+        NSLog(@"image: %@", image);
+        [_food_image setImageWithURL:[NSURL URLWithString:image[@"hostedSmallUrl"]] placeholderImage:_food_image.image];
+        [_food_image_large setImageWithURL:[NSURL URLWithString:image[@"hostedLargeUrl"]] placeholderImage:_food_image.image];
+        //        NSLog(@"link: %@", [NSURL URLWithString:[json[@"images"] objectForKey:@"hostedLargeUrl"]]);
+        _recipe_link = [json[@"source"] objectForKey:@"sourceRecipeUrl"];
+        NSLog(@"%@", _recipe_link);
+
+        if(json[@"yield"]) {
+            _yields = json[@"yield"];
+        } else {
+            _yields = @"";
+        }
+
+        if(json[@"totalTime"]) {
+            _time = json[@"totalTime"];
+        } else {
+            _time = @"";
+        }
+    } else {
+        NSLog(@"ERROR: %@", error);
+    }
+    return self;
 }
 
 - (NSString *) formatIngredients: (NSDictionary *) result {
-    NSString *formatted_text;
+    NSString *formatted_text = @"";
     for(NSString *ingredient in result) {
-        [formatted_text stringByAppendingFormat:@"%@\n", ingredient];
+        formatted_text = [formatted_text stringByAppendingFormat:@"%@\n", ingredient];
+//        NSLog(@"%@ | %@", ingredient, formatted_text);
     }
     return formatted_text;
 }

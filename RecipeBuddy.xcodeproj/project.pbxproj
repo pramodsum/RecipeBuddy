@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		491293911901538100B7063E /* food_list.txt in Resources */ = {isa = PBXBuildFile; fileRef = 491293901901538100B7063E /* food_list.txt */; };
+		493AE63D190615D9009AC6F5 /* commands.txt in Resources */ = {isa = PBXBuildFile; fileRef = 493AE63C190615D9009AC6F5 /* commands.txt */; };
+		493AE63F1906273C009AC6F5 /* select_recipes.txt in Resources */ = {isa = PBXBuildFile; fileRef = 493AE63E1906273C009AC6F5 /* select_recipes.txt */; };
 		4981D2EF1905E7D200A62CFE /* RecipeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4981D2EE1905E7D200A62CFE /* RecipeViewController.m */; };
 		4981D2F21905E9F300A62CFE /* YummlySearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 4981D2F11905E9F300A62CFE /* YummlySearch.m */; };
 		49C3DD761900D5AD0097511F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C3DD751900D5AD0097511F /* Foundation.framework */; };
@@ -61,6 +63,8 @@
 
 /* Begin PBXFileReference section */
 		491293901901538100B7063E /* food_list.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = food_list.txt; sourceTree = "<group>"; };
+		493AE63C190615D9009AC6F5 /* commands.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = commands.txt; sourceTree = "<group>"; };
+		493AE63E1906273C009AC6F5 /* select_recipes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = select_recipes.txt; sourceTree = "<group>"; };
 		4981D2ED1905E7D200A62CFE /* RecipeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeViewController.h; sourceTree = "<group>"; };
 		4981D2EE1905E7D200A62CFE /* RecipeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeViewController.m; sourceTree = "<group>"; };
 		4981D2F01905E9F300A62CFE /* YummlySearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YummlySearch.h; sourceTree = "<group>"; };
@@ -248,6 +252,8 @@
 			isa = PBXGroup;
 			children = (
 				491293901901538100B7063E /* food_list.txt */,
+				493AE63E1906273C009AC6F5 /* select_recipes.txt */,
+				493AE63C190615D9009AC6F5 /* commands.txt */,
 				49C3DD841900D5AD0097511F /* AppDelegate.h */,
 				49C3DD851900D5AD0097511F /* AppDelegate.m */,
 				49C3DE221900DE5F0097511F /* Recipe.h */,
@@ -404,8 +410,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				493AE63D190615D9009AC6F5 /* commands.txt in Resources */,
 				49C3DD8E1900D5AD0097511F /* Images.xcassets in Resources */,
 				491293911901538100B7063E /* food_list.txt in Resources */,
+				493AE63F1906273C009AC6F5 /* select_recipes.txt in Resources */,
 				49C3DD801900D5AD0097511F /* InfoPlist.strings in Resources */,
 				49C3DDBF1900D87F0097511F /* AcousticModelEnglish.bundle in Resources */,
 				49C3DD891900D5AD0097511F /* Main.storyboard in Resources */,
