@@ -159,14 +159,22 @@
 
 - (void) pocketsphinxDidStartCalibration {
 	NSLog(@"Pocketsphinx calibration has started.");
-    [[[UIAlertView alloc] initWithTitle:@"Your Sous Chef is Ready!" message:@"When you're ready to start listing, please say \"OK\" followed by the ingridients you wish to find recipes for! When finished just say \"Done\" or \"Finished\"!"
-                               delegate:self
-                      cancelButtonTitle:@"OK"
-                      otherButtonTitles:nil] show];
 }
 
 - (void) pocketsphinxDidCompleteCalibration {
 	NSLog(@"Pocketsphinx calibration is complete.");
+    [self.pocketsphinxController suspendRecognition];
+    [[[UIAlertView alloc] initWithTitle:@"Your Sous Chef is Ready!" message:@"When you're ready to start listing, please say \"OK\" followed by the ingridients you wish to find recipes for! When finished just say \"Done\" or \"Finished\"!"
+                               delegate:self
+                      cancelButtonTitle:nil
+                      otherButtonTitles:@"OK", nil] show];
+}
+
+- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if([[alertView title] isEqualToString:@"Your Sous Chef is Ready!"]) {
+        [self.pocketsphinxController resumeRecognition];
+    }
 }
 
 - (void) pocketsphinxDidStartListening {

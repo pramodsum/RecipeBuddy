@@ -12,6 +12,7 @@
 @interface RecipeCell : UITableViewCell
 
 - (void) configureCell: (Recipe *) recipe :(NSInteger) num;
+- (Recipe *) getRecipe;
 @property (strong, nonatomic) IBOutlet UILabel *name;
 @property (strong, nonatomic) IBOutlet UILabel *recipe_num;
 @property (strong, nonatomic) IBOutlet UIImageView *food_image;

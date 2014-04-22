@@ -159,6 +159,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4981D2F31905F04400A62CFE /* RecipeSearch */ = {
+			isa = PBXGroup;
+			children = (
+				49C3DDC71900DB590097511F /* RecipePuppySearch.h */,
+				49C3DDC81900DB590097511F /* RecipePuppySearch.m */,
+				4981D2F01905E9F300A62CFE /* YummlySearch.h */,
+				4981D2F11905E9F300A62CFE /* YummlySearch.m */,
+			);
+			name = RecipeSearch;
+			sourceTree = "<group>";
+		};
 		49C3DD691900D5AD0097511F = {
 			isa = PBXGroup;
 			children = (
@@ -244,10 +255,7 @@
 				49C3DD851900D5AD0097511F /* AppDelegate.m */,
 				49C3DE221900DE5F0097511F /* Recipe.h */,
 				49C3DE231900DE5F0097511F /* Recipe.m */,
-				49C3DDC71900DB590097511F /* RecipePuppySearch.h */,
-				49C3DDC81900DB590097511F /* RecipePuppySearch.m */,
-				4981D2F01905E9F300A62CFE /* YummlySearch.h */,
-				4981D2F11905E9F300A62CFE /* YummlySearch.m */,
+				4981D2F31905F04400A62CFE /* RecipeSearch */,
 			);
 			name = Model;
 			sourceTree = "<group>";

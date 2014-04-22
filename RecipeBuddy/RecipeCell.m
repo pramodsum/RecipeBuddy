@@ -9,7 +9,9 @@
 #import "RecipeCell.h"
 #import "UIImageView+WebCache.h"
 
-@implementation RecipeCell
+@implementation RecipeCell {
+    Recipe *cellRecipe;
+}
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -33,9 +35,14 @@
 }
 
 - (void) configureCell: (Recipe *) recipe :(NSInteger) num {
+    cellRecipe = recipe;
     _name.text = recipe.name;
     _recipe_num.text = [NSString stringWithFormat:@"%ld", (long)num];
     [_food_image setImageWithURL:[NSURL URLWithString:recipe.image_link] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+}
+
+- (Recipe *) getRecipe {
+    return cellRecipe;
 }
 
 @end

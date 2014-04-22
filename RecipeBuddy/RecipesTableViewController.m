@@ -88,6 +88,11 @@
     return cell;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    RecipeCell *cell = (RecipeCell *)[tableView cellForRowAtIndexPath:indexPath];
+
+}
+
 /*
 #pragma mark - Navigation
 
