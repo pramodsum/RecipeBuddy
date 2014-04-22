@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YummlySearch.h"
 
 @interface RecipesTableViewController : UITableViewController
 
 @property (strong, nonatomic) NSArray *recipes;
+@property (strong, nonatomic) YummlySearch *search;
 
 @end

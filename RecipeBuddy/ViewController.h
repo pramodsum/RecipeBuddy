@@ -45,8 +45,6 @@
 @property (nonatomic, assign) NSString *heardText;
 
 - (void) createLanguageModel;
-
-- (IBAction)startListingIngredients:(id)sender;
-- (IBAction)startSearch:(id)sender;
+@property (strong, nonatomic) IBOutlet UITextView *ingredientListView;
 
 @end

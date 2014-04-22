@@ -32,9 +32,9 @@
     // Configure the view for the selected state
 }
 
-- (void) configureCell: (Recipe *) recipe {
+- (void) configureCell: (Recipe *) recipe :(NSInteger) num {
     _name.text = recipe.name;
-    _ingredients.text = recipe.recipe_link;
+    _recipe_num.text = [NSString stringWithFormat:@"%ld", (long)num];
     [_food_image setImageWithURL:[NSURL URLWithString:recipe.image_link] placeholderImage:[UIImage imageNamed:@"placeholder"]];
 }
 

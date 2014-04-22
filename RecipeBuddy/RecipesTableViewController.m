@@ -8,12 +8,17 @@
 
 #import "RecipesTableViewController.h"
 #import "RecipeCell.h"
+#import "AppDelegate.h"
+
+#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 @interface RecipesTableViewController ()
 
 @end
 
-@implementation RecipesTableViewController
+@implementation RecipesTableViewController {
+    AppDelegate *appDelegate;
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -27,12 +32,28 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+
+    UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
+    [refresh setTintColor:UIColorFromRGB(0x60DFE5)];
+    [refresh addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventValueChanged];
+    self.refreshControl = refresh;
+}
+
+- (void)refreshData
+{
+    [self.tableView reloadData];
+    [self performSelector:@selector(stopRefresh) withObject:nil afterDelay:0.5];
+}
+
+
+- (void)stopRefresh
+{
+    [self.refreshControl endRefreshing];
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+    [self.tableView reloadData];
+    NSLog(@"Recipes loaded from search: %lu", _recipes.count);
 }
 
 - (void)didReceiveMemoryWarning
@@ -62,7 +83,7 @@
         cell = [[RecipeCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"recipe_cell"];
     }
 
-    [cell configureCell:[_recipes objectAtIndex:indexPath.row]];
+    [cell configureCell:[_recipes objectAtIndex:indexPath.row]:indexPath.row+1];
     
     return cell;
 }

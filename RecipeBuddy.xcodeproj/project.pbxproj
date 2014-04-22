@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		491293911901538100B7063E /* food_list.txt in Resources */ = {isa = PBXBuildFile; fileRef = 491293901901538100B7063E /* food_list.txt */; };
+		491293961901852400B7063E /* NavBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 491293951901852400B7063E /* NavBar.m */; };
+		4981D2EF1905E7D200A62CFE /* RecipeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4981D2EE1905E7D200A62CFE /* RecipeViewController.m */; };
+		4981D2F21905E9F300A62CFE /* YummlySearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 4981D2F11905E9F300A62CFE /* YummlySearch.m */; };
 		49C3DD761900D5AD0097511F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C3DD751900D5AD0097511F /* Foundation.framework */; };
 		49C3DD781900D5AD0097511F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C3DD771900D5AD0097511F /* CoreGraphics.framework */; };
 		49C3DD7A1900D5AD0097511F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C3DD791900D5AD0097511F /* UIKit.framework */; };
@@ -59,6 +62,12 @@
 
 /* Begin PBXFileReference section */
 		491293901901538100B7063E /* food_list.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = food_list.txt; sourceTree = "<group>"; };
+		491293941901852400B7063E /* NavBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavBar.h; sourceTree = "<group>"; };
+		491293951901852400B7063E /* NavBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavBar.m; sourceTree = "<group>"; };
+		4981D2ED1905E7D200A62CFE /* RecipeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeViewController.h; sourceTree = "<group>"; };
+		4981D2EE1905E7D200A62CFE /* RecipeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeViewController.m; sourceTree = "<group>"; };
+		4981D2F01905E9F300A62CFE /* YummlySearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YummlySearch.h; sourceTree = "<group>"; };
+		4981D2F11905E9F300A62CFE /* YummlySearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YummlySearch.m; sourceTree = "<group>"; };
 		49C3DD721900D5AD0097511F /* RecipeBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecipeBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49C3DD751900D5AD0097511F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		49C3DD771900D5AD0097511F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -237,6 +246,8 @@
 				49C3DE231900DE5F0097511F /* Recipe.m */,
 				49C3DDC71900DB590097511F /* RecipePuppySearch.h */,
 				49C3DDC81900DB590097511F /* RecipePuppySearch.m */,
+				4981D2F01905E9F300A62CFE /* YummlySearch.h */,
+				4981D2F11905E9F300A62CFE /* YummlySearch.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -245,6 +256,8 @@
 			isa = PBXGroup;
 			children = (
 				49C3DE281900E1800097511F /* Cells */,
+				491293941901852400B7063E /* NavBar.h */,
+				491293951901852400B7063E /* NavBar.m */,
 				49C3DD871900D5AD0097511F /* Main.storyboard */,
 			);
 			name = View;
@@ -257,6 +270,8 @@
 				49C3DD8B1900D5AD0097511F /* ViewController.m */,
 				49C3DE291900E1B30097511F /* RecipesTableViewController.h */,
 				49C3DE2A1900E1B30097511F /* RecipesTableViewController.m */,
+				4981D2ED1905E7D200A62CFE /* RecipeViewController.h */,
+				4981D2EE1905E7D200A62CFE /* RecipeViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -413,7 +428,9 @@
 				49C3DE1A1900DDD00097511F /* SDWebImageDownloaderOperation.m in Sources */,
 				49C3DD8C1900D5AD0097511F /* ViewController.m in Sources */,
 				49C3DE2B1900E1B30097511F /* RecipesTableViewController.m in Sources */,
+				4981D2F21905E9F300A62CFE /* YummlySearch.m in Sources */,
 				49C3DE171900DDD00097511F /* SDWebImageCompat.m in Sources */,
+				491293961901852400B7063E /* NavBar.m in Sources */,
 				49C3DE1E1900DDD00097511F /* UIImage+GIF.m in Sources */,
 				49C3DE1C1900DDD00097511F /* SDWebImagePrefetcher.m in Sources */,
 				49C3DD861900D5AD0097511F /* AppDelegate.m in Sources */,
@@ -430,6 +447,7 @@
 				49C3DE181900DDD00097511F /* SDWebImageDecoder.m in Sources */,
 				49C3DE161900DDD00097511F /* SDImageCache.m in Sources */,
 				49C3DE271900E17B0097511F /* RecipeCell.m in Sources */,
+				4981D2EF1905E7D200A62CFE /* RecipeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

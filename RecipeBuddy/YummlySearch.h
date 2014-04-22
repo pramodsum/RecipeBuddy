@@ -1,16 +1,16 @@
 //
-//  RecipePuppySearch.h
+//  YummlySearch.h
 //  RecipeBuddy
 //
-//  Created by Sumedha Pramod on 4/18/14.
+//  Created by Sumedha Pramod on 4/21/14.
 //  Copyright (c) 2014 Sumedha Pramod. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
-@interface RecipePuppySearch : NSObject
+@interface YummlySearch : NSObject
 
-- (RecipePuppySearch *) initWithIngredients:(NSArray *) ingredients;
+- (YummlySearch *) initWithIngredients:(NSArray *) ingredients;
 - (NSArray *) getRecipeResults;
 - (NSInteger) getRecipeCount;
 

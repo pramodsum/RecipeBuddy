@@ -11,5 +11,7 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) UITableViewController *recipeView;
+@property (strong, nonatomic) NSString *searchCompleted;
 
 @end

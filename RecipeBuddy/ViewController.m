@@ -8,8 +8,10 @@
 
 #import "ViewController.h"
 #import <OpenEars/OpenEarsLogging.h>
-#import "RecipePuppySearch.h"
+#import "YummlySearch.h"
 #import "RecipesTableViewController.h"
+#import "AppDelegate.h"
+#import "Recipe.h"
 
 @interface ViewController ()
 
@@ -19,7 +21,8 @@
     NSMutableArray *ingredients;
     NSString *lmPath;
     NSString *dicPath;
-    RecipePuppySearch *search;
+    YummlySearch *search;
+    BOOL wakeup;
 }
 
 @synthesize openEarsEventsObserver;
@@ -36,8 +39,11 @@
 {
     [super viewDidLoad];
 //    [OpenEarsLogging startOpenEarsLogging];
+    wakeup = false;
     ingredients = [[NSMutableArray alloc] init];
     [self.openEarsEventsObserver setDelegate:self];
+    [self createLanguageModel];
+    [self.pocketsphinxController startListeningWithLanguageModelAtPath:lmPath dictionaryAtPath:dicPath acousticModelAtPath:[AcousticModel pathToModel:@"AcousticModelEnglish"] languageModelIsJSGF:NO];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -54,8 +60,47 @@
 
 - (void) pocketsphinxDidReceiveHypothesis:(NSString *)hypothesis recognitionScore:(NSString *)recognitionScore utteranceID:(NSString *)utteranceID {
 
-	NSLog(@"The received hypothesis is %@ with a score of %@ and an ID of %@", hypothesis, recognitionScore, utteranceID);
+    NSMutableArray * words = [[NSMutableArray alloc] initWithArray:[hypothesis componentsSeparatedByString:@" "]];
 
+    NSLog(@"The received hypothesis is %@ with a score of %@ and an ID of %@", hypothesis, recognitionScore, utteranceID);
+
+    if([words[0] isEqual:@"OKAY"] && !wakeup) {
+        //Start listening for recipes
+        NSLog(@"Starting to listen for ingredients");
+        wakeup = true;
+
+        //Check ingredients right after wake up command
+        if([words count] > 2) {
+            [self addIngredients:[words componentsJoinedByString:@" "]];
+        }
+    } else if(([words[0] isEqual:@"FINISHED"] || [words[0] isEqual:@"DONE"]) && wakeup) {
+        [self.pocketsphinxController stopListening];
+        if([ingredients count] > 0) {
+            [self performSegueWithIdentifier:@"recipeSearch_segue" sender:self];
+        } else {
+            [[[UIAlertView alloc] initWithTitle:@"Uh Oh!"
+                                        message:@"Looks like you haven't listed any ingredients. Please call Sous Chef again!"
+                                       delegate:self
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil] show];
+        }
+    } else if([words[0] isEqual:@"CLEAR"])  {
+        [ingredients removeAllObjects];
+        NSLog(@"Cleared ingredient list");
+        [_ingredientListView setText:[ingredients componentsJoinedByString:@", "]];
+    } else if(wakeup){
+        [self addIngredients:hypothesis];
+    } else {
+        NSString *message = [NSString stringWithFormat:@"Sounds like you said \"%@\". The Sous Chef couldn't understand you. Try again!", [[hypothesis lowercaseString] capitalizedString]];
+        [[[UIAlertView alloc] initWithTitle:@"Huh? Try Again!"
+                                    message:message
+                                   delegate:self
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil] show];
+    }
+}
+
+- (void) addIngredients:(NSString *)hypothesis {
     //Check if ingredient is already in list
     if([ingredients containsObject:hypothesis]) {
         NSLog(@"Ingredient already exists in list, ignoring");
@@ -63,19 +108,8 @@
     else {
         [ingredients addObject:hypothesis];
         NSLog(@"Ingredients list so far: %@", ingredients);
-        [[[UIAlertView alloc] initWithTitle:@"Ingredient Added" message:hypothesis
-                                   delegate:self
-                          cancelButtonTitle:@"OK"
-                          otherButtonTitles:nil] show];
+        [_ingredientListView setText:[[[ingredients componentsJoinedByString:@", "] lowercaseString] capitalizedString]];
     }
-}
-
-- (IBAction)startListingIngredients:(id)sender {
-    [self.pocketsphinxController startListeningWithLanguageModelAtPath:lmPath dictionaryAtPath:dicPath acousticModelAtPath:[AcousticModel pathToModel:@"AcousticModelEnglish"] languageModelIsJSGF:NO];
-}
-
-- (IBAction)startSearch:(id)sender {
-//    [self performSegueWithIdentifier:@"recipeSearch_segue" sender:self];
 }
 
  #pragma mark - Navigation
@@ -85,14 +119,11 @@
     {
     if ([[segue identifier] isEqualToString:@"recipeSearch_segue"]) {
         [self.pocketsphinxController stopListening];
-        search = [[RecipePuppySearch alloc] initWithIngredients:ingredients];
-
-        while([search getRecipeCount] == 0 && ![search.noResults isEqual:@"TRUE"]) {
-            NSLog(@"Still waiting for search results....");
-        }
+        search = [[YummlySearch alloc] initWithIngredients:ingredients];
 
         RecipesTableViewController *vc = (RecipesTableViewController *)[segue destinationViewController];
-        vc.recipes = [[NSArray alloc] initWithArray:[search getRecipeResults]];
+        [vc setRecipes:[[NSArray alloc] initWithArray:[search getRecipeResults]]];
+        [vc setSearch:search];
         [vc.tableView reloadData];
         NSLog(@"Recipes: %lu", (unsigned long)vc.recipes.count);
     }
@@ -128,7 +159,7 @@
 
 - (void) pocketsphinxDidStartCalibration {
 	NSLog(@"Pocketsphinx calibration has started.");
-    [[[UIAlertView alloc] initWithTitle:@"Start Listing!" message:@""
+    [[[UIAlertView alloc] initWithTitle:@"Your Sous Chef is Ready!" message:@"When you're ready to start listing, please say \"OK\" followed by the ingridients you wish to find recipes for! When finished just say \"Done\" or \"Finished\"!"
                                delegate:self
                       cancelButtonTitle:@"OK"
                       otherButtonTitles:nil] show];

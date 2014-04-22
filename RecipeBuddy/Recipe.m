@@ -17,11 +17,20 @@
 @synthesize food_image = _food_image;
 @synthesize ingredients = _ingredients;
 
-- (Recipe *) initWithResult:(NSDictionary *) recipe {
+- (Recipe *) initWithRecipePuppyResult:(NSDictionary *) recipe {
     _name = [recipe objectForKey:@"title"];
     _recipe_link = [[recipe objectForKey:@"href"] stringByReplacingOccurrencesOfString:@"\\" withString:@""];
     NSLog(@"LINK: %@", _recipe_link);
     _image_link = [[recipe objectForKey:@"thumbnail"] stringByReplacingOccurrencesOfString:@"\\" withString:@""];
+    [_food_image setImageWithURL:[NSURL URLWithString:_image_link] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+
+    return self;
+}
+
+- (Recipe *) initWithYummlyResult:(NSDictionary *) recipe {
+    _id = [recipe objectForKey:@"id"];
+    _name = [recipe objectForKey:@"recipeName"];
+    _image_link = [[[recipe objectForKey:@"smallImageUrls"] firstObject] stringByReplacingOccurrencesOfString:@"\\" withString:@""];
     [_food_image setImageWithURL:[NSURL URLWithString:_image_link] placeholderImage:[UIImage imageNamed:@"placeholder"]];
 
     return self;
