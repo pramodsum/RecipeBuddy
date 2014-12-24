@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>7408551B-D595-4BEF-8E7A-ACD65AD7E286</string>
+	<key>IDESourceControlProjectName</key>
+	<string>RecipeBuddy</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>2BC3D49324CB5B7C3E89AD376C9C01F3E48DD8A0</key>
+		<string>https://github.com/pramodsum/RecipeBuddy.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>RecipeBuddy.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>2BC3D49324CB5B7C3E89AD376C9C01F3E48DD8A0</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/pramodsum/RecipeBuddy.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>2BC3D49324CB5B7C3E89AD376C9C01F3E48DD8A0</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>2BC3D49324CB5B7C3E89AD376C9C01F3E48DD8A0</string>
+			<key>IDESourceControlWCCName</key>
+			<string>RecipeBuddy</string>
+		</dict>
+	</array>
+</dict>
+</plist>
